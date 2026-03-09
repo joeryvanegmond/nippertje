@@ -25,21 +25,4 @@ jobs:
           username: ${{ secrets.SSH_DOMAIN }}
           port: ${{ secrets.SSH_PORT }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            echo "Current dir:"
-            pwd
-
-            echo "Home dir contents:"
-            ls -la
-
-            echo "Entering nippertje:"
-            cd nippertje || exit 1
-
-            echo "Now in:"
-            pwd
-
-            echo "Directory contents:"
-            ls -la
-
-            echo "Running deploy:"
-            ./deploy.sh
+          script: "cd nippertje && ./deploy.sh"
