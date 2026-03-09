@@ -1,12 +1,16 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-DIpGLZzS.css",
+    "file": "assets/app-YOJQekUk.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
     "names": [
       "app.css"
     ]
+  },
+  "resources/fonts/VT323-Regular.ttf": {
+    "file": "assets/VT323-Regular-BZsogN36.ttf",
+    "src": "resources/fonts/VT323-Regular.ttf"
   },
   "resources/js/app.js": {
     "file": "assets/app-DM8Tzrnj.js",
