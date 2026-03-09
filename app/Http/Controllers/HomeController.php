@@ -9,11 +9,12 @@ use Inertia\Inertia;
 class HomeController extends Controller
 {
     public function index(GvbService $service){
-        $data = $service->getDepartures('NL:S:30009902');
+        // $data = $service->getDepartures('NL:S:30009902');
+        $data = [];
         return Inertia::render('Home', [
-            'line' => $data[0]['line'],
-            'destination'=> $data[0]['destination'],
-            'timer' => $data[0]['expected']
+            'line' => $data[0]['line'] ?? "F9",
+            'destination'=> $data[0]['destination'] ?? "Centraal Station",
+            'timer' => $data[0]['expected'] ?? "21:30"
         ]);
     }
 }

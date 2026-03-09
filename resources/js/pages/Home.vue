@@ -34,9 +34,7 @@ function hideMenu() {
     <div class="w-100 bg-primary" style="height: 50%"></div>
 
     <!-- Veerpont gecentreerd over beide divs heen -->
-    <div class="position-fixed bottom-0 start-50 translate-middle-x">
-      <Veerpont :line="line" :destination="destination" :timer="timer"/>
-    </div>
+    <Veerpont class="main-svg" :line="line" :destination="destination" :timer="timer"/>
 
     <Transition name="fade">
       <nav v-if="menuVisible" class="position-fixed top-0 end-0 p-4">
