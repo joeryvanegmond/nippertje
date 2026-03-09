@@ -29,9 +29,8 @@ function calculateTimer() {
     // Als tijd al voorbij is, morgen gebruiken
     if (departure < now) {
         router.reload({ only: ['line', 'destination', 'timer'] })
-        departure.setDate(departure.getDate() + 1)
     }
-    const diffMs = departure - now
+    const diffMs = departure - now;
 
     if (diffMs <= 0) {
         timerDisplay.value = '00:00'
