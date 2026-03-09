@@ -27,4 +27,4 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: | 
             cd nippertje
-            deploy.sh
+            ./deploy.sh
