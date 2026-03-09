@@ -11,14 +11,24 @@
 }
 
 @font-face {
-  font-family: "VT323";
-  src: url("../fonts/VT323-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: "VT323";
+    src: url("../fonts/VT323-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 #destination-text tspan,
 #timer-text tspan {
-  font-family: "VT323", monospace;
+    font-family: "VT323", monospace;
 }
+
+svg {
+    position: fixed;
+    top: 0;
+    padding: 5%;
+    width: 100%;
+}
+
+
+

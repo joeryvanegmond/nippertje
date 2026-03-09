@@ -28,13 +28,13 @@ function calculateTimer() {
     const departure = new Date(`${today}T${props.timer}:00`)
     // Als tijd al voorbij is, morgen gebruiken
     if (departure < now) {
+        router.reload({ only: ['line', 'destination', 'timer'] })
         departure.setDate(departure.getDate() + 1)
     }
     const diffMs = departure - now
 
     if (diffMs <= 0) {
         timerDisplay.value = '00:00'
-        router.reload({ only: ['line', 'destination', 'timer'] })
         clearInterval(interval)
         return
     }
@@ -67,5 +67,5 @@ watch([props, timerDisplay], updateSvg)
 </script>
 
 <template>
-    <div ref="svgContainer" style="height: 600px;"></div>
+    <div ref="svgContainer"></div>
 </template>
