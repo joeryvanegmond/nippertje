@@ -25,4 +25,4 @@ jobs:
           username: ${{ secrets.SSH_DOMAIN }}
           port: ${{ secrets.SSH_PORT }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: "cd nippertje && /deploy.sh"
+          script: "cd nippertje && deploy.sh"
