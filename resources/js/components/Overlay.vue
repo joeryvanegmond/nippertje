@@ -118,6 +118,7 @@ function back() {
                                 <CommandGroup heading="Haltes">
                                     <CommandItem v-for="stop in lineStops" :key="stop.code" :value="stop.code"
                                         @select="selectLineStop(stop)">
+                                        <span class="font-medium">{{ stop.name }}</span>
                                     </CommandItem>
                                 </CommandGroup>
                             </CommandList>
@@ -154,7 +155,7 @@ function back() {
                                         <span class="text-xs text-muted-foreground w-10">{{ departure.line }}</span>
                                         <span class="font-medium">{{ departure.destination }}</span>
                                         <span class="ml-auto text-xs text-muted-foreground">{{ departure.expected
-                                            }}</span>
+                                        }}</span>
                                     </CommandItem>
                                 </CommandGroup>
                             </CommandList>
