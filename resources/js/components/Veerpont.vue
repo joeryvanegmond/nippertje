@@ -26,14 +26,12 @@ function calculateTimer() {
     const now = new Date()
     const today = now.toISOString().split('T')[0]
     const departure = new Date(`${today}T${props.timer}:00`)
-    // Als tijd al voorbij is, morgen gebruiken
-    if (departure < now) {
-        router.reload({ only: ['line', 'destination', 'timer'] })
-    }
+
     const diffMs = departure - now;
 
     if (diffMs <= 0) {
         timerDisplay.value = '00:00'
+        router.reload({ only: ['line', 'destination', 'timer'] })
         clearInterval(interval)
         return
     }
@@ -48,6 +46,12 @@ onMounted(async () => {
     const response = await fetch('/images/veerpont.svg')
     const svgText = await response.text()
     svgContainer.value.innerHTML = svgText
+
+    const svgEl = svgContainer.value.querySelector('svg')
+    if (svgEl) {
+        svgEl.removeAttribute('width')
+        svgEl.removeAttribute('height')
+    }
 
     updateSvg()
     calculateTimer();
