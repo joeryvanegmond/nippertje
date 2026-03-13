@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html class="">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{-- @viteReactRefresh --}}
+    @routes
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     @inertiaHead
   </head>
