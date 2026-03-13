@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-qu-9KtJp.css",
+    "file": "assets/app-D-AErTVj.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -8,12 +8,16 @@
       "app.css"
     ]
   },
+  "resources/fonts/AlfaSlabOne-Regular.ttf": {
+    "file": "assets/AlfaSlabOne-Regular-De-1OOnu.ttf",
+    "src": "resources/fonts/AlfaSlabOne-Regular.ttf"
+  },
   "resources/fonts/VT323-Regular.ttf": {
     "file": "assets/VT323-Regular-BZsogN36.ttf",
     "src": "resources/fonts/VT323-Regular.ttf"
   },
   "resources/js/app.js": {
-    "file": "assets/app-CzJ2Jr2H.js",
+    "file": "assets/app-azd-0yrV.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
