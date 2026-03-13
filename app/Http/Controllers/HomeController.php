@@ -10,28 +10,30 @@ class HomeController extends Controller
 {
     public function index(Request $request, GvbService $service)
     {
-        $stopCode = $request->input('stopCode', 'NL:S:30009902');
-        $lineName = $request->input('lineName');
-
-        $data = $service->getDepartures($stopCode);
-
-        if ($lineName) {
-            $destination = $request->input('destination');
-
-            $departure = collect($data)->first(function ($d) use ($lineName, $destination) {
-                if ($destination) {
-                    return $d['line'] === $lineName && $d['destination'] === $destination;
-                }
-                return $d['line'] === $lineName;  // ← zonder destination gewoon eerste van die lijn
-            });
+        $stopCode = $request->input('stopCode');
+        if($stopCode){
+            $lineName = $request->input('lineName');
+    
+            $data = $service->getDepartures($stopCode);
+    
+            if ($lineName) {
+                $destination = $request->input('destination');
+    
+                $departure = collect($data)->first(function ($d) use ($lineName, $destination) {
+                    if ($destination) {
+                        return $d['line'] === $lineName && $d['destination'] === $destination;
+                    }
+                    return $d['line'] === $lineName;  // ← zonder destination gewoon eerste van die lijn
+                });
+            }
         }
 
         $departure = $departure ?? $data[0] ?? null;
 
         return Inertia::render('Home', [
-            'line'        => $departure['line']        ?? 'F9',
-            'destination' => $departure['destination'] ?? 'Centraal Station',
-            'timer'       => $departure['expected']    ?? '21:30',
+            'line'        => $departure['line']        ?? '',
+            'destination' => $departure['destination'] ?? '',
+            'timer'       => $departure['expected']    ?? '',
             'stopCode'    => $stopCode,
         ]);
     }
@@ -39,9 +41,9 @@ class HomeController extends Controller
     public function search(Request $request, GvbService $service)
     {
         $base = [
-            'line'           => 'F9',
-            'destination'    => 'Centraal Station',
-            'timer'          => '21:30',
+            'line'           => '',
+            'destination'    => '',
+            'timer'          => '',
             'results'        => [],
             'lineStops'      => [],
             'stopDepartures' => [],

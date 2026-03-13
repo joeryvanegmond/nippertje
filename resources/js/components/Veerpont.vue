@@ -23,27 +23,29 @@ function updateSvg() {
 }
 
 function calculateTimer() {
-    const now = new Date()
-    const today = now.toISOString().split('T')[0]
-    const departure = new Date(`${today}T${props.timer}:00`)
+    if (props.timer) {
+        const now = new Date()
+        const today = now.toISOString().split('T')[0]
+        const departure = new Date(`${today}T${props.timer}:00`)
 
-    if (departure <= now) {
-        departure.setDate(departure.getDate() + 1)
+        if (departure <= now) {
+            departure.setDate(departure.getDate() + 1)
+        }
+
+        const diffMs = departure - now;
+
+        if (diffMs <= 0) {
+            timerDisplay.value = '00:00'
+            router.reload({ only: ['line', 'destination', 'timer'] })
+            clearInterval(interval)
+            return
+        }
+
+        const minutes = Math.floor(diffMs / 1000 / 60)
+        const seconds = Math.floor((diffMs / 1000) % 60)
+
+        timerDisplay.value = `${minutes}:${String(seconds).padStart(2, '0')}`
     }
-    
-    const diffMs = departure - now;
-
-    if (diffMs <= 0) {
-        timerDisplay.value = '00:00'
-        router.reload({ only: ['line', 'destination', 'timer'] })
-        clearInterval(interval)
-        return
-    }
-
-    const minutes = Math.floor(diffMs / 1000 / 60)
-    const seconds = Math.floor((diffMs / 1000) % 60)
-
-    timerDisplay.value = `${minutes}:${String(seconds).padStart(2, '0')}`
 }
 
 onMounted(async () => {
