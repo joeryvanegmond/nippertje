@@ -27,6 +27,10 @@ function calculateTimer() {
     const today = now.toISOString().split('T')[0]
     const departure = new Date(`${today}T${props.timer}:00`)
 
+    if (departure <= now) {
+        departure.setDate(departure.getDate() + 1)
+    }
+    
     const diffMs = departure - now;
 
     if (diffMs <= 0) {
