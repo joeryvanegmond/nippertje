@@ -11,14 +11,14 @@ class HomeController extends Controller
     public function index(Request $request, GvbService $service)
     {
         $stopCode = $request->input('stopCode');
-        if($stopCode){
+        if ($stopCode) {
             $lineName = $request->input('lineName');
-    
+
             $data = $service->getDepartures($stopCode);
-    
+
             if ($lineName) {
                 $destination = $request->input('destination');
-    
+
                 $departure = collect($data)->first(function ($d) use ($lineName, $destination) {
                     if ($destination) {
                         return $d['line'] === $lineName && $d['destination'] === $destination;
@@ -27,14 +27,18 @@ class HomeController extends Controller
                 });
             }
         }
-
+        $category = $departure['category'] ?? 'bus'; // fallback
         $departure = $departure ?? $data[0] ?? null;
-
         return Inertia::render('Home', [
             'line'        => $departure['line']        ?? '',
             'destination' => $departure['destination'] ?? '',
             'timer'       => $departure['expected']    ?? '',
             'stopCode'    => $stopCode,
+            'linetextcolor'    => $departure['linetextcolor'] ?? '',
+            'linecolor'        => $departure['linecolor'] ?? '',
+            'stopName'      => $request->input('stopName', ''),
+            'disruption' => $departure['disruptions'][0] ?? '',
+            'component'     => str_contains(strtolower($category), 'ferry') ? 'ferry' : 'bus',
         ]);
     }
 
@@ -44,11 +48,15 @@ class HomeController extends Controller
             'line'           => '',
             'destination'    => '',
             'timer'          => '',
+            'linetextcolor'  => '',
+            'linecolor'      => '',
+            'stopName'       => '',
             'results'        => [],
             'lineStops'      => [],
             'stopDepartures' => [],
+            'disruptions'    => ''
         ];
-
+        // dd($departures = collect($service->getDepartures($request->input('stopCode'))));
         if ($request->has('lineCode')) {
             return Inertia::render('Home', array_merge($base, [
                 'lineStops' => $service->getStopsByLine($request->input('lineCode')),

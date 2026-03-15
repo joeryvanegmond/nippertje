@@ -24,7 +24,6 @@ class GvbService
             'previewInterval' => 60,
             'passageType'     => 'Departure',
         ]);
-
         $cycling = ($lat && $lng) ? $this->routeService->getCyclingTime(
             fromLat: (float) config('services.ors.lat'),
             fromLng: (float) config('services.ors.lng'),
@@ -35,7 +34,6 @@ class GvbService
         return collect($response->json())->map(function ($departure) use ($cycling) {
             $expected = Carbon::parse($departure['departureGroup']['expectedDateTime'])->setTimezone('Europe/Amsterdam');
             $minutesUntilDeparture = now('Europe/Amsterdam')->diffInMinutes($expected, false);
-
             return [
                 'line'             => $departure['publishedLineNumber'],
                 'destination'      => $departure['destinationName'],
@@ -47,6 +45,9 @@ class GvbService
                 'cycling'          => $cycling ?? null,
                 'minutes_until'    => round($minutesUntilDeparture, 1),
                 'can_make_it'      => $cycling ? $minutesUntilDeparture >= $cycling['duration_minutes'] : null,
+                'linetextcolor'    => $departure['lineTextColor'],
+                'linecolor'        => $departure['lineColor'],
+                'category'      => $departure['transportType'] ?? null, // ← toevoegen
             ];
         })->toArray();
     }
@@ -113,5 +114,4 @@ class GvbService
             ->values()
             ->toArray();
     }
-    
 }

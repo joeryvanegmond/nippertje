@@ -64,7 +64,8 @@ function selectLineStop(stop) {
     selectedLine.value = null
     router.get('/', {
         stopCode: stop.code,
-        lineName: line?.name
+        lineName: line?.name,
+        stopName: stop.name,
     })
 }
 
@@ -79,7 +80,8 @@ function selectDeparture(departure) {
     router.get('/', {
         stopCode: stop.code,
         lineName: departure.line,
-        destination: departure.destination
+        destination: departure.destination,
+        stopName: stop.name,
     })
 }
 
